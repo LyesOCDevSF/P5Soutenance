@@ -10,8 +10,17 @@ public class FareCalculatorService {
             throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
         }
 
-        int inHour = ticket.getInTime().getHours();
-        int outHour = ticket.getOutTime().getHours();
+        
+
+        int inHour = ticket.getInTime().getHours(); // getInTime = new Date()
+       int outHour = ticket.getOutTime().getHours();
+        
+       Long inHourInMillis = ticket.getInTime().getTime();
+       Long outHourInMillis = ticket.getOutTime().getTime();
+       
+       double durationMin = (double) TimeUnit.MILLISECONDS.toMinutes(outHourInMillis - inHourInMillis);
+      /* double durationHour = Precision.round((durationMin / 60), 2);*/
+       double durationHour = durationMin / 60;
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
         int duration = outHour - inHour;
