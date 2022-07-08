@@ -12,8 +12,8 @@ public class FareCalculatorService {
 
         
 
-         // int inHour = ticket.getInTime().getHours(); // getInTime = new Date()
-       // int outHour = ticket.getOutTime().getHours();
+        int inHour = ticket.getInTime().getHours(); // getInTime = new Date()
+       int outHour = ticket.getOutTime().getHours();
         
        Long inHourInMillis = ticket.getInTime().getTime();
        Long outHourInMillis = ticket.getOutTime().getTime();
