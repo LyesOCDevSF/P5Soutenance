@@ -8,7 +8,7 @@ import com.parkit.parkingsystem.model.Ticket;
 
 public class FareCalculatorService {
 
-    private int price;
+    private int visit;
 
     /**
      * @param ticket
@@ -47,9 +47,13 @@ public class FareCalculatorService {
             }
             default: throw new IllegalArgumentException("Unkown Parking Type");
         }
+        if(visit > 1 ) {
+            double discountedPrice = ticket.getPrice() * Fare.REDUCTION;
+            ticket.setPrice(discountedPrice);	
+        }
         }
         else{
-            ticket.setPrice(price = 0);
+            ticket.setPrice(0);
         }
     }
     }
