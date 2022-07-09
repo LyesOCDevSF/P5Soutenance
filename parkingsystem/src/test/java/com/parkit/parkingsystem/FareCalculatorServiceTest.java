@@ -8,6 +8,12 @@ import com.parkit.parkingsystem.service.FareCalculatorService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
+import com.parkit.parkingsystem.constants.DBConstants;
+import com.parkit.parkingsystem.dao.ParkingSpotDAO;
+import com.parkit.parkingsystem.dao.TicketDAO;
+
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +22,10 @@ import java.util.Date;
 public class FareCalculatorServiceTest {
 
     private static FareCalculatorService fareCalculatorService;
-    private Ticket ticket;
+    private static Ticket ticket;
+    private static Ticket ticketDAO;
+    private static DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
+    private static ParkingSpotDAO parkingSpotDAO;
 
     @BeforeAll
     private static void setUp() {
@@ -136,5 +145,41 @@ public class FareCalculatorServiceTest {
         fareCalculatorService.calculateFare(ticket);
         assertEquals( 0 , ticket.getPrice());
     }
+    @Test
+    public void Reduction(){	  	
+    	Date inTime = new Date();
+    	Ticket ticket1 = new Ticket();
+    	Ticket ticket2 = new Ticket();
+    	ParkingSpot parkingSpot1 = new ParkingSpot(1, ParkingType.CAR, true);
+    	ParkingSpot parkingSpot2 = new ParkingSpot(2, ParkingType.CAR, true);
+    	
+    	ticket1.setParkingSpot(parkingSpot1);
+        ticket1.setVehicleRegNumber("CARTEST");
+        ticket1.setPrice(0);
+        ticket1.setInTime(inTime);
+        ticket1.setOutTime(inTime);
+        
+        ticket2.setParkingSpot(parkingSpot2);
+        ticket2.setVehicleRegNumber("CARTEST");
+        ticket2.setPrice(0);
+        ticket2.setInTime(inTime);
+        ticket2.setOutTime(inTime);
+        
+        ticketDAO.saveTicket(ticket1);
+        ticketDAO.saveTicket(ticket2);
+        
+    	
+        inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) );
+        Date outTime = new Date();
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
+        
+        ticket.setVehicleRegNumber("CARTEST"); 
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(ticket.getPrice(), Fare.CAR_RATE_PER_HOUR * Fare.REDUCTION);
+    }
+
 
 }
