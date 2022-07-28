@@ -1,35 +1,42 @@
 package com.parkit.parkingsystem;
 
-import com.parkit.parkingsystem.constants.Fare;
-import com.parkit.parkingsystem.constants.ParkingType;
-import com.parkit.parkingsystem.model.ParkingSpot;
-import com.parkit.parkingsystem.model.Ticket;
-import com.parkit.parkingsystem.service.FareCalculatorService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Date;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
+
 import com.parkit.parkingsystem.constants.DBConstants;
+import com.parkit.parkingsystem.constants.Fare;
+import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.dao.ParkingSpotDAO;
 import com.parkit.parkingsystem.dao.TicketDAO;
-
-
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Date;
+import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
+import com.parkit.parkingsystem.model.ParkingSpot;
+import com.parkit.parkingsystem.model.Ticket;
+import com.parkit.parkingsystem.service.FareCalculatorService;
 
 public class FareCalculatorServiceTest {
 
     private static FareCalculatorService fareCalculatorService;
     private static Ticket ticket;
-    private static Ticket ticketDAO;
-    private static DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
+    private static TicketDAO ticketDAO;
     private static ParkingSpotDAO parkingSpotDAO;
-
+    private static DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
+    
+    
     @BeforeAll
     private static void setUp() {
         fareCalculatorService = new FareCalculatorService();
+        parkingSpotDAO = new ParkingSpotDAO();
+        parkingSpotDAO.dataBaseConfig = dataBaseTestConfig;
+        ticketDAO = new TicketDAO();
+        ticketDAO.dataBaseConfig = dataBaseTestConfig;
+        DBConstants.dataBaseName = "test";
+
     }
 
     @BeforeEach
@@ -158,6 +165,7 @@ public class FareCalculatorServiceTest {
         ticket1.setPrice(0);
         ticket1.setInTime(inTime);
         ticket1.setOutTime(inTime);
+       
         
         ticket2.setParkingSpot(parkingSpot2);
         ticket2.setVehicleRegNumber("CARTEST");
@@ -180,6 +188,8 @@ public class FareCalculatorServiceTest {
         fareCalculatorService.calculateFare(ticket);
         assertEquals(ticket.getPrice(), Fare.CAR_RATE_PER_HOUR * Fare.REDUCTION);
     }
+
+	
 
 
 }
