@@ -19,6 +19,10 @@ public class TicketDAO {
 
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
+    /**
+     * @param ticket
+     * @return
+     */
     public boolean saveTicket(Ticket ticket){
         Connection con = null;
         try {
@@ -34,12 +38,17 @@ public class TicketDAO {
             return ps.execute();
         }catch (Exception ex){
             logger.error("Error fetching next available slot",ex);
-        }finally {
+        }
+        finally {
             dataBaseConfig.closeConnection(con);
             return false;
         }
     }
 
+    /**
+     * @param vehicleRegNumber
+     * @return
+     */
     public Ticket getTicket(String vehicleRegNumber) {
         Connection con = null;
         Ticket ticket = null;
@@ -63,32 +72,12 @@ public class TicketDAO {
             dataBaseConfig.closePreparedStatement(ps);
         }catch (Exception ex){
             logger.error("Error fetching next available slot",ex);
-        }finally {
+        }
+        finally
+         {
             dataBaseConfig.closeConnection(con);
             return ticket;
         }
-    }
-    
-    public int getRecurrence(String vehicleRegNumber) {
-    	  int visit = 0;
-    	  Connection con = null;
-          try {
-        	  if (DBConstants.dataBaseName == "prod") con = dataBaseConfig.getConnection();
-        	  else con = dataBaseConfig.getConnectionTest();
-              PreparedStatement ps = con.prepareStatement(DBConstants.RECURING);
-              ps.setString(1,vehicleRegNumber);
-              ResultSet rs = ps.executeQuery();
-              if (rs.next()) {
-                  visit = rs.getInt(1);
-              }
-              dataBaseConfig.closeResultSet(rs);
-              dataBaseConfig.closePreparedStatement(ps);
-          } catch (Exception ex){
-              logger.error("Error fetching next available slot",ex);
-          } finally {
-              dataBaseConfig.closeConnection(con);
-              return visit;
-          }
     }
 
     public boolean updateTicket(Ticket ticket) {

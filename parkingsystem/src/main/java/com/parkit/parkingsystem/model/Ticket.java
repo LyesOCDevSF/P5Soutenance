@@ -1,5 +1,6 @@
 package com.parkit.parkingsystem.model;
 
+
 import java.util.Date;
 
 public class Ticket {
@@ -56,5 +57,8 @@ public class Ticket {
 
     public void setOutTime(Date outTime) {
         this.outTime = outTime;
+    }
+
+    public void saveTicket(Ticket ticket1) {
     }
 }
