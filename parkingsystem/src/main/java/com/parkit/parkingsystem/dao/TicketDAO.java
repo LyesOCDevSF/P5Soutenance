@@ -68,6 +68,28 @@ public class TicketDAO {
             return ticket;
         }
     }
+    
+    public int getRecurrence(String vehicleRegNumber) {
+    	  int visit = 0;
+    	  Connection con = null;
+          try {
+        	  if (DBConstants.dataBaseName == "prod") con = dataBaseConfig.getConnection();
+        	  else con = dataBaseConfig.getConnectionTest();
+              PreparedStatement ps = con.prepareStatement(DBConstants.RECURING);
+              ps.setString(1,vehicleRegNumber);
+              ResultSet rs = ps.executeQuery();
+              if (rs.next()) {
+                  visit = rs.getInt(1);
+              }
+              dataBaseConfig.closeResultSet(rs);
+              dataBaseConfig.closePreparedStatement(ps);
+          } catch (Exception ex){
+              logger.error("Error fetching next available slot",ex);
+          } finally {
+              dataBaseConfig.closeConnection(con);
+              return visit;
+          }
+    }
 
     public boolean updateTicket(Ticket ticket) {
         Connection con = null;
