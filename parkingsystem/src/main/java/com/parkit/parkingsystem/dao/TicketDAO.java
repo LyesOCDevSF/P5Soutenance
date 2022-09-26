@@ -19,7 +19,8 @@ public class TicketDAO {
 
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
-    public boolean saveTicket(Ticket ticket){
+    @SuppressWarnings("finally")
+	public boolean saveTicket(Ticket ticket){
         Connection con = null;
         try {
             con = dataBaseConfig.getConnection();
@@ -40,7 +41,8 @@ public class TicketDAO {
         }
     }
 
-    public Ticket getTicket(String vehicleRegNumber) {
+    @SuppressWarnings("finally")
+	public Ticket getTicket(String vehicleRegNumber) {
         Connection con = null;
         Ticket ticket = null;
         try {
@@ -69,7 +71,8 @@ public class TicketDAO {
         }
     }
     
-    public int getRecurrence(String vehicleRegNumber) {
+    @SuppressWarnings("finally")
+	public int getRecurrence(String vehicleRegNumber) {
   	  int visit = 0;
   	  Connection con = null;
         try {
