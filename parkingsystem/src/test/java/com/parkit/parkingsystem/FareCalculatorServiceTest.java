@@ -150,6 +150,21 @@ public class FareCalculatorServiceTest {
         fareCalculatorService.calculateFare(ticket);
         assertEquals( 0 , ticket.getPrice());
     }
+    
+    @Test
+    public void inf30minBike() {
+        Date inTime = new Date();
+        inTime.setTime(System.currentTimeMillis()- (25*60*1000));
+        Date outTime = new Date();
+        ParkingSpot parkingspot2 = new ParkingSpot (1, ParkingType.BIKE,false);
+        
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingspot2);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(0, ticket.getPrice());
+    }
+    
     @Test
     public void Reduction(){	  	
     	Date inTime = new Date();

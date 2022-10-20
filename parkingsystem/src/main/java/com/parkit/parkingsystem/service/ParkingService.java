@@ -68,7 +68,7 @@ public class ParkingService {
             if(parkingNumber > 0){
                 parkingSpot = new ParkingSpot(parkingNumber,parkingType, true);
             }else{
-                throw new Exception("Error fetching parking number from DB. Parking slots might be full");
+
             }
         }catch(IllegalArgumentException ie){
             logger.error("Error parsing user input for type of vehicle", ie);
@@ -103,7 +103,7 @@ public class ParkingService {
             Ticket ticket = ticketDAO.getTicket(vehicleRegNumber);
             Date outTime = new Date();
             ticket.setOutTime(outTime);
-            fareCalculatorService.calculateFare(ticket);
+
             if(ticketDAO.updateTicket(ticket)) {
                 ParkingSpot parkingSpot = ticket.getParkingSpot();
                 parkingSpot.setAvailable(true);
