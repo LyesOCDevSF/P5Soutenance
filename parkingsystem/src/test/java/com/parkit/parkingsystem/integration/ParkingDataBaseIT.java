@@ -88,10 +88,10 @@ public class ParkingDataBaseIT {
         testParkingABike();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
-        Ticket ticket2 = ticketDAO.getTicket("FGHIJ");
-        assertNotNull(ticket2.getPrice());
+        Ticket ticket = ticketDAO.getTicket("FGHIJ");
+        assertNotNull(ticket.getPrice());
         Thread.sleep(5000);
-        assertNotNull(ticket2.getOutTime());
+        assertNotNull(ticket.getOutTime());
         
     }
 

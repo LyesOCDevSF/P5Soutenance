@@ -50,7 +50,8 @@ public class FareCalculatorService {
         	}
         	if(visit > 1 ) {
         		double discountedPrice = ticket.getPrice() * Fare.REDUCTION;
-        	    ticket.setPrice(discountedPrice);	
+        	    ticket.setPrice(discountedPrice);
+        	    
         	}
         }
         else {
