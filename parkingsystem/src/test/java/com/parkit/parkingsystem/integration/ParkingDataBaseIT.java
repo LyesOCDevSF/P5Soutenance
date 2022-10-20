@@ -73,5 +73,26 @@ public class ParkingDataBaseIT {
         Thread.sleep(5000);
         assertNotNull(ticket.getOutTime());
     }
+    @Test
+    public void testParkingABike() {
+        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+        parkingService.processIncomingVehicle();
+        Ticket ticket = ticketDAO.getTicket("FGHIJ");
+        assertNotNull(ticket);
+        assertFalse(ticket.getParkingSpot().isAvailable());
+    
+    }
+    
+    @Test
+    public void testParkinglotExit() throws InterruptedException{
+        testParkingABike();
+        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+        parkingService.processExitingVehicle();
+        Ticket ticket2 = ticketDAO.getTicket("FGHIJ");
+        assertNotNull(ticket2.getPrice());
+        Thread.sleep(5000);
+        assertNotNull(ticket2.getOutTime());
+        
+    }
 
 }

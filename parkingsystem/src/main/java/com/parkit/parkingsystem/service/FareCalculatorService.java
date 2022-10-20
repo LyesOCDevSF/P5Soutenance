@@ -36,7 +36,7 @@ public class FareCalculatorService {
         if (durationMin > 30) {
         	TicketDAO ticketDAO = new TicketDAO();
             int visit = ticketDAO.getRecurrence(ticket.getVehicleRegNumber());
-            
+            ticket.getParkingSpot().setParkingType(null);
         	switch (ticket.getParkingSpot().getParkingType()){ // trouver comment appliquer la réduction de 30 min si le vehicule reste moins de 30 minutes 
 	            case CAR: {
 	                ticket.setPrice(durationHour * Fare.CAR_RATE_PER_HOUR); // double durationHour pose probleme ?
