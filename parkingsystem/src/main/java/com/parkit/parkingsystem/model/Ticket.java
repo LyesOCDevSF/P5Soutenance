@@ -10,7 +10,6 @@ public class Ticket {
     private double price;
     private Date inTime;
     private Date outTime;
-
     public int getId() {
         return id;
     }

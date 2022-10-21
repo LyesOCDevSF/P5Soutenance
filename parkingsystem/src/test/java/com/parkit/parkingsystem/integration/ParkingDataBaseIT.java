@@ -77,14 +77,14 @@ public class ParkingDataBaseIT {
     public void testParkingABike() {
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processIncomingVehicle();
-        Ticket ticket = ticketDAO.getTicket("FGHIJ");
+        Ticket ticket = ticketDAO.getTicket("ABCDEF");
         assertNotNull(ticket);
         assertFalse(ticket.getParkingSpot().isAvailable());
     
     }
     
-    @Test
-    public void testParkinglotExit() throws InterruptedException{
+   // @Test
+   /*public void testParkinglotExit() throws InterruptedException{
         testParkingABike();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
@@ -93,6 +93,7 @@ public class ParkingDataBaseIT {
         Thread.sleep(5000);
         assertNotNull(ticket.getOutTime());
         
-    }
+    }*/
+    // test integration recurence a faire, ne pas oublier test unit aussi
 
 }
