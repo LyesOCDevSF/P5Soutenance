@@ -97,6 +97,8 @@ public class ParkingService {
         }
     }
 
+    
+    // Ajouter "Welcome back" avec la reduction 
     public void processExitingVehicle() {
         try{
             String vehicleRegNumber = getVehichleRegNumber();
@@ -110,7 +112,9 @@ public class ParkingService {
                 parkingSpotDAO.updateParking(parkingSpot);
                 System.out.println("Please pay the parking fare:" + ticket.getPrice());
                 System.out.println("Recorded out-time for vehicle number:" + ticket.getVehicleRegNumber() + " is:" + outTime);
-            }else{
+            }
+           // if(ticketDAO) {}switch case ?
+            else{
                 System.out.println("Unable to update ticket information. Error occurred");
             }
         }catch(Exception e){
