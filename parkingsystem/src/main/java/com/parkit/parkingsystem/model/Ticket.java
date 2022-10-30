@@ -44,7 +44,7 @@ public class Ticket {
 
     public Date getInTime() {
         //this.inTime = new Date(inTime.getTime());
-        return this.inTime;
+        return (Date) this.inTime.clone();
     }
 
     public void setInTime(Date inTime) {
@@ -53,7 +53,7 @@ public class Ticket {
 
     public Date getOutTime() {
         //this.outTime = new Date(outTime.getTime());
-        return this.outTime;
+        return (Date) this.outTime.clone();
     }
 
     public void setOutTime(Date outTime) {
