@@ -43,7 +43,7 @@ public class Ticket {
     }
 
     public Date getInTime() {
-        //this.inTime = new Date(inTime.getTime());
+        this.inTime = new Date(inTime.getTime());
         return this.inTime;
     }
 
@@ -52,7 +52,7 @@ public class Ticket {
     }
 
     public Date getOutTime() {
-        //this.outTime = new Date(outTime.getTime());
+        this.outTime = new Date(outTime.getTime());
         return this.outTime;
     }
 
