@@ -15,6 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
 
 public class FareCalculatorServiceTest {
@@ -22,18 +25,17 @@ public class FareCalculatorServiceTest {
     private static FareCalculatorService fareCalculatorService;
     private Ticket ticket;
     private static DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
-    private static ParkingSpotDAO parkingSpotDAO;
     private static TicketDAO ticketDAO;
 
 
     @BeforeAll
     private static void setUp() {
         fareCalculatorService = new FareCalculatorService();
-        parkingSpotDAO = new ParkingSpotDAO();
+        ParkingSpotDAO parkingSpotDAO = new ParkingSpotDAO();
         parkingSpotDAO.dataBaseConfig = dataBaseTestConfig;
         ticketDAO = new TicketDAO();
         ticketDAO.dataBaseConfig = dataBaseTestConfig;
-        DBConstants.dataBaseName = "test";
+       // DBConstants.dataBaseName = "test";
 
     }
 
@@ -237,6 +239,11 @@ public class FareCalculatorServiceTest {
         assertEquals(ticket.getPrice(), Fare.BIKE_RATE_PER_HOUR * Fare.REDUCTION);
     }
 
+}
+
+
+
+
 
     
-}
+

@@ -43,21 +43,23 @@ public class Ticket {
     }
 
     public Date getInTime() {
-        return inTime;
+        //this.inTime = new Date(inTime.getTime());
+        return this.inTime;
     }
 
     public void setInTime(Date inTime) {
-        this.inTime = inTime;
+        this.inTime = new Date(inTime.getTime()) ; //inTime
     }
 
     public Date getOutTime() {
-        return outTime;
+        //this.outTime = new Date(outTime.getTime());
+        return this.outTime;
     }
 
     public void setOutTime(Date outTime) {
-        this.outTime = outTime;
+        this.outTime = new Date(outTime.getTime());
     }
 
-    public void saveTicket(Ticket ticket1) {
-    }
+    /*public void saveTicket(Ticket ticket) {
+    }*/
 }
