@@ -60,6 +60,16 @@ public class Ticket {
         this.outTime = new Date(outTime.getTime());
     }
 
-    /*public void saveTicket(Ticket ticket) {
+    public boolean recurrent;
+
+    public void setRecurrent(boolean recurrent) {
+        this.recurrent = recurrent;
+    }
+
+    public boolean getRecurrent() {
+        return recurrent;
+
+    }
+        /*public void saveTicket(Ticket ticket) {
     }*/
 }
