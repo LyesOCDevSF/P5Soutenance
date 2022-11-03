@@ -9,6 +9,7 @@ import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.service.FareCalculatorService;
+import net.sf.saxon.value.DateTimeValue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class FareCalculatorServiceTest {
 
@@ -170,6 +172,8 @@ public class FareCalculatorServiceTest {
     @Test
     public void Reduction(){	  	
     	Date inTime = new Date();
+        inTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) );
+
     	Ticket ticket1 = new Ticket();
     	Ticket ticket2 = new Ticket();
     	ParkingSpot parkingSpot1 = new ParkingSpot(1, ParkingType.CAR, true);
@@ -195,12 +199,12 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
         
-        ticket.setVehicleRegNumber("CARTEST"); 
+        ticket.setVehicleRegNumber("CARTEST");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
-        assertEquals(Fare.CAR_RATE_PER_HOUR * Fare.REDUCTION, ticket.getPrice());
+        assertEquals(Fare.CAR_RATE_PER_HOUR * Fare.REDUCTION, ticket.getPrice(), 0.1);
     }
     
     @Test
@@ -231,13 +235,14 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
         
-        ticket.setVehicleRegNumber("BIKETEST"); 
+        ticket.setVehicleRegNumber("BIKETEST");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
-        assertEquals(ticket.getPrice(), Fare.BIKE_RATE_PER_HOUR * Fare.REDUCTION);
+        assertEquals(ticket.getPrice(), Fare.BIKE_RATE_PER_HOUR * Fare.REDUCTION, 0.1);
     }
+
 
 }
 
