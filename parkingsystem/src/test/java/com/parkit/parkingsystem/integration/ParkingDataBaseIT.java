@@ -74,17 +74,26 @@ public class ParkingDataBaseIT {
         assertNotNull(ticket.getOutTime());
     }
     @Test
-    public void testParkingABike() throws InterruptedException {
+    public void testParkingABike() {
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processIncomingVehicle();
         Ticket ticket = ticketDAO.getTicket("ABCDEF");
-        Thread.sleep(1000);
         assertNotNull(ticket);
-        Thread.sleep(1000);
         assertFalse(ticket.getParkingSpot().isAvailable());
     
     }
     
-
+   // @Test
+   /*public void testParkinglotExit() throws InterruptedException{
+        testParkingABike();
+        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+        parkingService.processExitingVehicle();
+        Ticket ticket = ticketDAO.getTicket("FGHIJ");
+        assertNotNull(ticket.getPrice());
+        Thread.sleep(5000);
+        assertNotNull(ticket.getOutTime());
+        
+    }*/
+    // test integration recurence a faire, ne pas oublier test unit aussi
 
 }
