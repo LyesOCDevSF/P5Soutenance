@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ParkingSpotDAO {
     private static final Logger logger = LogManager.getLogger("ParkingSpotDAO");
@@ -35,12 +36,24 @@ public class ParkingSpotDAO {
         }
 
         finally {
+            try {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            } finally {
+
+            }
 
             dataBaseConfig.closeConnection(con);
 
 
         }
         return result;
+
     }
 
     public boolean updateParking(ParkingSpot parkingSpot){
