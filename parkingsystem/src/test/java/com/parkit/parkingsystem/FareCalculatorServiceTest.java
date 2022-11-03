@@ -173,16 +173,9 @@ public class FareCalculatorServiceTest {
     public void Reduction(){	  	
     	Date inTime = new Date();
         inTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) );
-
-
     	ParkingSpot parkingSpot1 = new ParkingSpot(1, ParkingType.CAR, true);
     	ParkingSpot parkingSpot2 = new ParkingSpot(2, ParkingType.CAR, true);
-    	
 
-        
-
-        
-    	
         inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) );
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
