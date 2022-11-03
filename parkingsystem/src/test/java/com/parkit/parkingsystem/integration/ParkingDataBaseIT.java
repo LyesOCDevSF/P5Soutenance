@@ -83,17 +83,6 @@ public class ParkingDataBaseIT {
     
     }
     
-   // @Test
-   /*public void testParkinglotExit() throws InterruptedException{
-        testParkingABike();
-        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-        parkingService.processExitingVehicle();
-        Ticket ticket = ticketDAO.getTicket("FGHIJ");
-        assertNotNull(ticket.getPrice());
-        Thread.sleep(5000);
-        assertNotNull(ticket.getOutTime());
-        
-    }*/
-    // test integration recurence a faire, ne pas oublier test unit aussi
+
 
 }
