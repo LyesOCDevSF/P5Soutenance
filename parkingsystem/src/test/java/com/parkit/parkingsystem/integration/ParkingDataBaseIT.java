@@ -82,6 +82,19 @@ public class ParkingDataBaseIT {
         assertFalse(ticket.getParkingSpot().isAvailable());
     
     }
+
+    @Test
+    public void testReccurenceVehicule(){
+
+        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+        parkingService.processIncomingVehicle();
+        //TODO: check that a ticket is actualy saved in DB and Parking table is updated with availability
+        Ticket ticket = ticketDAO.getTicket("ABCDEF");
+        ticket.setRecurrent(true);
+        assertNotNull(ticket.getOutTime());
+        assertFalse(ticket.getParkingSpot().isAvailable());
+
+    }
     
 
 

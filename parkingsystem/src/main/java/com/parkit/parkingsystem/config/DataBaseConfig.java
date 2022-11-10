@@ -39,7 +39,7 @@ public class DataBaseConfig {
         logger.info("Create DB connection");
         Class.forName(props.getProperty("sgbd.driver"));
         //Class.forName("com.mysql.cj.jdbc.Driver");
-        con = DriverManager.getConnection(props.getProperty("sgbd.url"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
+        con = DriverManager.getConnection(props.getProperty("sgbd.urltest"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
         return con;
                 //DriverManager.getConnection(
                // "jdbc:mysql://localhost:3306/test?serverTimezone=UTC", "root", "Kumquatfroid8708*");
@@ -49,11 +49,11 @@ public class DataBaseConfig {
     public Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
 
         Properties props = new Properties();
-        FileInputStream fis = null;
+        FileInputStream fis2 = null;
         Connection con = null;
         try{
-            fis = new FileInputStream("src/main/java/domaine");
-            props.load(fis);
+            fis2 = new  FileInputStream("src/main/java/domaine/config.properties");
+            props.load(fis2);
 
 
         } catch (FileNotFoundException e) {
@@ -61,17 +61,17 @@ public class DataBaseConfig {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }finally {
-            if (fis != null){
-                fis.close();
+            if (fis2 != null){
+                fis2.close();
             }
         }
 
 
 
         logger.info("Create DB connection");
-        Class.forName(props.getProperty("sgbd.driver"));
-        //Class.forName("com.mysql.cj.jdbc.Driver");
-        con = DriverManager.getConnection(props.getProperty("sgbd.url"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
+        //Class.forName(props.getProperty("sgbd.driver"));
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(props.getProperty("sgbd.urlprod"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
         return con;
 
                 /*DriverManager.getConnection(

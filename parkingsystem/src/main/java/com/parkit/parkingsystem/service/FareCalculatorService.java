@@ -51,6 +51,7 @@ public class FareCalculatorService {
         	if( ticket.getRecurrent()== true) {
         		double discountedPrice = ticket.getPrice() * Fare.REDUCTION;
         	    ticket.setPrice(discountedPrice);
+
         	    
         	}
         }
