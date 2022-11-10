@@ -16,7 +16,7 @@ public class ParkingService {
 
     private static final Logger logger = LogManager.getLogger("ParkingService");
 
-    private static FareCalculatorService fareCalculatorService = new FareCalculatorService();
+    private static final FareCalculatorService fareCalculatorService = new FareCalculatorService();
 
     private InputReaderUtil inputReaderUtil;
     private ParkingSpotDAO parkingSpotDAO;
@@ -45,9 +45,12 @@ public class ParkingService {
                 Date inTime = new Date();
                 Date outTime = new Date();
                 Ticket ticket = new Ticket();
+               // int visit = ticketDAO.getRecurrence(ticket.getVehicleRegNumber());
                 //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
                 //ticket.setId(ticketID);
-                if( ticket.getRecurrent()== true){ System.out.println("Welcome Back !" + vehicleRegNumber);}
+                /*if(visit>1){ ticket.setRecurrent(true);
+                System.out.println("WelcomeBack");}
+                else{}*/
                 ticket.setParkingSpot(parkingSpot);
                 ticket.setVehicleRegNumber(vehicleRegNumber);
                 ticket.setPrice(0);
