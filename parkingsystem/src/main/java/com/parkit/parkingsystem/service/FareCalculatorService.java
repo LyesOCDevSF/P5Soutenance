@@ -56,7 +56,13 @@ public class FareCalculatorService {
         	}
         }
         else {
+			TicketDAO ticketDAO = new TicketDAO();
+			int visit = ticketDAO.getRecurrence(ticket.getVehicleRegNumber());
         	ticket.setPrice(0);
+			if(visit > 1){ ticket.setRecurrent(true);}
+			if(ticket.getRecurrent()==true){
+				System.out.println("WelcomeBack ! " );
+			}
         }            
     }
 }
