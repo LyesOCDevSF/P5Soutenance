@@ -196,9 +196,7 @@ public class FareCalculatorServiceTest {
         ParkingSpot parkingSpot1 = new ParkingSpot(1, ParkingType.BIKE, true);
         ParkingSpot parkingSpot2 = new ParkingSpot(2, ParkingType.BIKE, true);
 
-
          // modifier
-
 
         ticket.setRecurrent(true);
 
