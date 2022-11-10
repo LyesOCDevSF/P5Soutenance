@@ -46,17 +46,36 @@ public class DataBaseConfig {
     }
 
 
-    public Connection getConnection() throws ClassNotFoundException, SQLException {
+    public Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
+
+        Properties props = new Properties();
+        FileInputStream fis = null;
+        Connection con = null;
+        try{
+            fis = new FileInputStream("src/main/java/domaine");
+            props.load(fis);
 
 
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }finally {
+            if (fis != null){
+                fis.close();
+            }
+        }
 
 
 
         logger.info("Create DB connection");
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        //con = DriverManager.getConnection(props.getProperty("sgbd.url")),
-        return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/prod?serverTimezone=UTC","root","Kumquatfroid8708*");
+        Class.forName(props.getProperty("sgbd.driver"));
+        //Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(props.getProperty("sgbd.url"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
+        return con;
+
+                /*DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/prod?serverTimezone=UTC","root","Kumquatfroid8708*");*/
     }
 
 
