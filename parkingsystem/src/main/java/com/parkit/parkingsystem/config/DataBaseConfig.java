@@ -41,8 +41,6 @@ public class DataBaseConfig {
         //Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(props.getProperty("sgbd.urltest"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
         return con;
-                //DriverManager.getConnection(
-               // "jdbc:mysql://localhost:3306/test?serverTimezone=UTC", "root", "Kumquatfroid8708*");
     }
 
 
@@ -54,8 +52,6 @@ public class DataBaseConfig {
         try{
             fis2 = new  FileInputStream("src/main/java/domaine/config.properties");
             props.load(fis2);
-
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -74,8 +70,7 @@ public class DataBaseConfig {
         con = DriverManager.getConnection(props.getProperty("sgbd.urlprod"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
         return con;
 
-                /*DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/prod?serverTimezone=UTC","root","Kumquatfroid8708*");*/
+
     }
 
 

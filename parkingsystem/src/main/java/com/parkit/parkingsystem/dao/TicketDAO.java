@@ -91,6 +91,10 @@ public class TicketDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 visit = rs.getInt(1);
+                if (visit > 1){
+                    logger.info("WelcomeBack !");
+                   System.out.println("WelcomeBack");
+                }
             }
 
         } catch (Exception ex){
