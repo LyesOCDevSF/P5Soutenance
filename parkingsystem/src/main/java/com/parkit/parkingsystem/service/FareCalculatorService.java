@@ -32,11 +32,12 @@ public class FareCalculatorService {
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
         //int duration = outHour - inHour;
-         
+		TicketDAO ticketDAO = new TicketDAO();
+		int visit = ticketDAO.getRecurrence(ticket.getVehicleRegNumber());
+		if(visit > 1){ ticket.setRecurrent(true);}
+
         if (durationMin > 30) {
-        	TicketDAO ticketDAO = new TicketDAO();
-            int visit = ticketDAO.getRecurrence(ticket.getVehicleRegNumber());
-			if(visit > 1){ ticket.setRecurrent(true);}
+
         	switch (ticket.getParkingSpot().getParkingType()){ // trouver comment appliquer la réduction de 30 min si le vehicule reste moins de 30 minutes 
 	            case CAR: {
 	                ticket.setPrice(durationHour * Fare.CAR_RATE_PER_HOUR); // double durationHour pose probleme ?
@@ -51,18 +52,15 @@ public class FareCalculatorService {
         	if( ticket.getRecurrent()== true) {
         		double discountedPrice = ticket.getPrice() * Fare.REDUCTION;
         	    ticket.setPrice(discountedPrice);
+				System.out.println("WelcomeBack");
 
         	    
         	}
         }
         else {
-			TicketDAO ticketDAO = new TicketDAO();
-			int visit = ticketDAO.getRecurrence(ticket.getVehicleRegNumber());
+
         	ticket.setPrice(0);
-			if(visit > 1){ ticket.setRecurrent(true);}
-			if(ticket.getRecurrent()==true){
-				System.out.println("WelcomeBack ! " );
+
 			}
         }            
     }
-}
