@@ -16,7 +16,7 @@ public class TicketDAO {
 
     private static final Logger logger = LogManager.getLogger("TicketDAO");
 
-    public DataBaseConfig dataBaseConfig = new DataBaseConfig();
+    public static DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
     public boolean saveTicket(Ticket ticket){
         Connection con = null;
@@ -78,7 +78,7 @@ public class TicketDAO {
         return ticket;
     }
     
-    public int getRecurrence(String vehicleRegNumber) {
+    public static int getRecurrence(String vehicleRegNumber) {
   	  int visit = 0;
   	  Connection con = null;
         PreparedStatement ps = null;
