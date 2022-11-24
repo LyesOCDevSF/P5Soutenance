@@ -85,27 +85,19 @@ public class ParkingDataBaseIT {
     @Test
     public void testReccurenceVehicule() throws InterruptedException {
 
-
+        TicketDAO ticketDAO1 = new TicketDAO();
+        testParkingACar();
         testParkingLotExit();
         testParkingACar();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
-        //TODO: check that the fare generated and out time are populated correctly in the database
         Ticket ticket = ticketDAO.getTicket("ABCDEF");
         //int visit = 1;
-        TicketDAO.getRecurrence("ABCDEF");
+        ticketDAO1.getRecurrence("ABCDEF");
         assertEquals(ticket.getRecurrent()== true);
-        assertNotNull(ticket.getPrice());
-        Thread.sleep(5000);
         assertNotNull(ticket.getOutTime());
-
-
-
-
     }
 
     private void assertEquals(boolean b) {
     }
-
-
 }

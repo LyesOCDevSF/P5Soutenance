@@ -37,9 +37,6 @@ public class FareCalculatorServiceTest {
         ParkingSpotDAO parkingSpotDAO = new ParkingSpotDAO();
         parkingSpotDAO.dataBaseConfig = dataBaseTestConfig;
         ticketDAO = new TicketDAO();
-        TicketDAO.dataBaseConfig = dataBaseTestConfig;
-       // DBConstants.dataBaseName = "test";
-
     }
 
     @BeforeEach
@@ -196,15 +193,10 @@ public class FareCalculatorServiceTest {
 
         ParkingSpot parkingSpot1 = new ParkingSpot(1, ParkingType.BIKE, true);
         ParkingSpot parkingSpot2 = new ParkingSpot(2, ParkingType.BIKE, true);
-
-         // modifier
-
         ticket.setRecurrent(true);
-
         inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) );
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
-        
         ticket.setVehicleRegNumber("BIKETEST");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
@@ -212,8 +204,6 @@ public class FareCalculatorServiceTest {
         fareCalculatorService.calculateFare(ticket);
         assertEquals(ticket.getPrice(), Fare.BIKE_RATE_PER_HOUR * Fare.REDUCTION);
     }
-
-
 }
 
 
