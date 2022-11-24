@@ -16,7 +16,7 @@ public class TicketDAO {
 
     private static final Logger logger = LogManager.getLogger("TicketDAO");
 
-    public static DataBaseConfig dataBaseConfig = new DataBaseConfig();
+    public  DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
     public boolean saveTicket(Ticket ticket){
         Connection con = null;
@@ -42,7 +42,6 @@ public class TicketDAO {
         }
         return false;
     }
-
     public Ticket getTicket(String vehicleRegNumber) {
         Connection con = null;
         Ticket ticket = null;
@@ -74,18 +73,16 @@ public class TicketDAO {
             dataBaseConfig.closeConnection(con);
 
         }
-
         return ticket;
     }
     
-    public static int getRecurrence(String vehicleRegNumber) {
+    public  int getRecurrence(String vehicleRegNumber) {
   	  int visit = 0;
   	  Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-      	  if (DBConstants.dataBaseName == "prod") con = dataBaseConfig.getConnection();
-      	  else con = dataBaseConfig.getConnectionTest();
+      	   con = dataBaseConfig.getConnection();
             ps = con.prepareStatement(DBConstants.RECURING);
             ps.setString(1,vehicleRegNumber);
             rs = ps.executeQuery();
@@ -96,20 +93,15 @@ public class TicketDAO {
                    System.out.println("WelcomeBack");
                 }
             }
-
         } catch (Exception ex){
             logger.error("Error fetching next available slot",ex);
         } finally {
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
-
         }
         return visit;
   }
-
-    
-    
     public boolean updateTicket(Ticket ticket) {
         Connection con = null;
         PreparedStatement ps = null;

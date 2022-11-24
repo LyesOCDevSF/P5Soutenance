@@ -10,11 +10,6 @@ public class DataBaseConfig {
 
     private static final Logger logger = LogManager.getLogger("DataBaseConfig");
 
-    //private static ConnexionBDD connexionBDD = new ConnexionBDD();
-
-
-
-
     public Connection getConnectionTest() throws ClassNotFoundException, SQLException, IOException {
 
         Properties props = new Properties();
@@ -34,16 +29,11 @@ public class DataBaseConfig {
                 fis.close();
             }
         }
-
-
         logger.info("Create DB connection");
         Class.forName(props.getProperty("sgbd.driver"));
-        //Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(props.getProperty("sgbd.urltest"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
         return con;
     }
-
-
     public Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
 
         Properties props = new Properties();
@@ -61,19 +51,12 @@ public class DataBaseConfig {
                 fis2.close();
             }
         }
-
-
-
         logger.info("Create DB connection");
         //Class.forName(props.getProperty("sgbd.driver"));
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(props.getProperty("sgbd.urlprod"), props.getProperty("sgbd.login"), props.getProperty("sgbd.password"));
         return con;
-
-
     }
-
-
     public void closeConnection(Connection con){
         if(con!=null){
             try {
@@ -84,7 +67,6 @@ public class DataBaseConfig {
             }
         }
     }
-
     public void closePreparedStatement(PreparedStatement ps) {
         if(ps!=null){
             try {
@@ -95,7 +77,6 @@ public class DataBaseConfig {
             }
         }
     }
-
     public void closeResultSet(ResultSet rs) {
         if(rs!=null){
             try {
